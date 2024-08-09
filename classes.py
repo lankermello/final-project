@@ -2,6 +2,7 @@ class Spaceship:
   def __init__(self, speed, hp):
     self.speed = speed
     self.hp = hp
+  
 
 class Enemy:
   def __init__(self, damage, defense):
