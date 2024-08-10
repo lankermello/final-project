@@ -17,8 +17,11 @@ def draw():
 def keyPressed(event):
   #print('keyPressed.. ' + str(p5.key))
   #a/d: left to right movement
-  #space: dash
-  pass
+  if key == 'a':
+    #move to the left
+    spaceship.x -= 10
+  elif key == 'd':
+    spaceship.x += 10
 
 def keyReleased(event):
   #print('keyReleased.. ' + str(p5.key))
