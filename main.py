@@ -1,15 +1,47 @@
 import js as p5
+from classes import *
+from movement import *
+import random
 
 print('Assignment #8 (Final Project Part 2)\n')
 canvasX = 300
-canvasY = 300
+canvasY = 700
+enemyChance = 5
+enemies = [] #list of enemies
+spaceshipImg = p5.loadImage("sprites/spaceship.jpg")
+enemy0Img = p5.loadImage("sprites/enemy1.png")
+enemy1Img = p5.loadImage("sprites/enemy0.png")
+
+
 def setup():
-  p5.createCanvas(canvasX, canvasY) 
+  #called once
+  p5.createCanvas(canvasX, canvasY)
+  global player
+  player = Spaceship(10, 150, 230, spaceshipImg)
 
 def draw():
+  #called continuously after setup()
   p5.background(255)  
   p5.fill(0)
+
+  player.draw()
+
+  spawn = random.randint(0, 100)
+  if spawn <= enemyChance:
+    pass
+    #spawn an enemy and add it to the list
+    
   
+
+  
+  
+  
+'''
+Game logic
+0.05 chance to generate an enemy each second
+if enemy is hit remove from list
+'''
+
 
 # event functions below should be included,
 # even if they don't do anything:
