@@ -6,7 +6,7 @@ import random
 print('Assignment #8 (Final Project Part 2)\n')
 canvasX = 300
 canvasY = 700
-enemyChance = 5
+enemyChance = 2
 enemies = [] #list of enemies
 spaceshipImg = p5.loadImage("sprites/spaceship.jpg")
 enemy0Img = p5.loadImage("sprites/enemy1.png")
@@ -20,7 +20,7 @@ def setup():
   player = Spaceship(10, 150, 230, spaceshipImg)
 
   #spawn one enemy at the beginning
-  enemies.append
+  enemies.append(Enemy(50, 50, enemy0Img))
 
 def draw():
   #called continuously after setup()
@@ -29,7 +29,7 @@ def draw():
 
   player.draw()
 
-  spawn = random.randint(0, 100)
+  spawn = random.randint(0, 1000)
   if spawn <= enemyChance:
     #spawn an enemy and add it to the list
     ex = random.randint(0, 280)
@@ -37,6 +37,10 @@ def draw():
     eimg = random.random()
     eimg = enemy1Img if eimg else enemy0Img
     enemies.append(Enemy(ex, ey, eimg))
+
+  #draw the enemies
+  for ele in enemies:
+    ele.draw()
    
     
   

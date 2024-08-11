@@ -20,10 +20,10 @@ class Enemy:
     self.y = y
     self.img = img
     
-  def draw():
+  def draw(self):
     p5.push()
     p5.translate(self.x, self.y)
-    p5.image(self.img, 0, 0)
+    p5.image(self.img, 0, 0, 10, 10)
     p5.pop()
   #function to fire
   #function to die and delete
