@@ -19,6 +19,9 @@ def setup():
   global player
   player = Spaceship(10, 150, 230, spaceshipImg)
 
+  #spawn one enemy at the beginning
+  enemies.append
+
 def draw():
   #called continuously after setup()
   p5.background(255)  
@@ -28,8 +31,13 @@ def draw():
 
   spawn = random.randint(0, 100)
   if spawn <= enemyChance:
-    pass
     #spawn an enemy and add it to the list
+    ex = random.randint(0, 280)
+    ey = random.randint(0, 200)
+    eimg = random.random()
+    eimg = enemy1Img if eimg else enemy0Img
+    enemies.append(Enemy(ex, ey, eimg))
+   
     
   
 
