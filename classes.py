@@ -51,7 +51,7 @@ class SelfBullet:
   def draw(self):
     p5.push()
     p5.translate(self.x, self.y)
-    p5.image(self.img, 0, 0, 5, 5)
+    p5.image(self.img, 0, 0, 2, 2)
     p5.pop()
   
     
@@ -67,7 +67,7 @@ class EnemyBullet:
   def draw(self):
     p5.push()
     p5.translate(self.x, self.y)
-    p5.image(self.img, 0, 0, 2, 2)
+    p5.image(self.img, 0, 0, 5, 5)
     p5.pop()
 '''
 TODO

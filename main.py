@@ -7,7 +7,7 @@ print('Assignment #8 (Final Project Part 2)\n')
 canvasX = 300
 canvasY = 400
 enemyChance = 2
-enemyShootChance = 5
+enemyShootChance = 1
 enemies = [] #list of enemies
 bullets = []
 enemyBullets = []
@@ -48,6 +48,10 @@ def draw():
   for ele in enemies:
     ele.draw()
     ele.move()
+    shootChance = random.randint(0, 100)
+    if shootChance < enemyShootChance:
+      print("LOL", len(enemyBullets))
+      enemyBullets.append(EnemyBullet(ele.x, ele.y, enemyBulletImg))
 
   for bul in bullets:
     bul.draw()
@@ -63,12 +67,10 @@ def draw():
     bul.move()
     if bul.y > 400:
       enemyBullets.remove(bul)
-    #move
-'''
-Game logic
-0.05 chance to generate an enemy each second
-if enemy is hit remove from list
-'''
+    if hitbox(bul.x, bul.y, player.x, player.x+20, player.y, player.y+40):
+      enemyBullets.remove(bul)
+      player.hp -= 1
+      
 # event functions below should be included,
 # even if they don't do anything:
 
@@ -95,6 +97,3 @@ def mousePressed(event):
 def mouseReleased(event):
   #print('mouseReleased..')
   pass
-
-setup()
-draw()
