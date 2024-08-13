@@ -5,12 +5,16 @@ import random
 
 print('Assignment #8 (Final Project Part 2)\n')
 canvasX = 300
-canvasY = 700
+canvasY = 400
 enemyChance = 2
 enemies = [] #list of enemies
+bullets = []
+enemyBullets = []
 spaceshipImg = p5.loadImage("sprites/spaceship.jpg")
 enemy0Img = p5.loadImage("sprites/enemy1.png")
 enemy1Img = p5.loadImage("sprites/enemy0.png")
+bulletImg = p5.loadImage("sprites/bullet.png")
+enemyBulletImg = p5.loadImage("sprites/bulletEnemy.png")
 
 
 def setup():
@@ -24,7 +28,7 @@ def setup():
 
 def draw():
   #called continuously after setup()
-  p5.background(255)  
+  p5.background(51)  
   p5.fill(0)
 
   player.draw()
@@ -41,31 +45,32 @@ def draw():
   #draw the enemies
   for ele in enemies:
     ele.draw()
-   
-    
-  
+    ele.move()
 
-  
-  
-  
+  for bul in bullets:
+    bul.draw()
+    bul.move()
+    
+  for bul in enemyBullets:
+    bul.draw()
+    bul.move()
+    #move
 '''
 Game logic
 0.05 chance to generate an enemy each second
 if enemy is hit remove from list
 '''
-
-
 # event functions below should be included,
 # even if they don't do anything:
 
 def keyPressed(event):
   #print('keyPressed.. ' + str(p5.key))
   #a/d: left to right movement
-  if key == 'a':
+  if p5.key == 'a':
     #move to the left
-    spaceship.x -= 10
-  elif key == 'd':
-    spaceship.x += 10
+    player.x -= 10
+  elif p5.key == 'd':
+    player.x += 10
 
 def keyReleased(event):
   #print('keyReleased.. ' + str(p5.key))
@@ -75,6 +80,7 @@ def mousePressed(event):
   #print('mousePressed..')
   #this will control firing from the spaceship
   #right key for a missile?
+  bullets.append(SelfBullet(player.x, player.y, bulletImg))
   pass
 
 def mouseReleased(event):
@@ -83,4 +89,3 @@ def mouseReleased(event):
 
 setup()
 draw()
-  
