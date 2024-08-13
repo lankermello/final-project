@@ -7,6 +7,7 @@ print('Assignment #8 (Final Project Part 2)\n')
 canvasX = 300
 canvasY = 400
 enemyChance = 2
+enemyShootChance = 5
 enemies = [] #list of enemies
 bullets = []
 enemyBullets = []
@@ -15,6 +16,7 @@ enemy0Img = p5.loadImage("sprites/enemy1.png")
 enemy1Img = p5.loadImage("sprites/enemy0.png")
 bulletImg = p5.loadImage("sprites/bullet.png")
 enemyBulletImg = p5.loadImage("sprites/bulletEnemy.png")
+maxEnemyCount = 15
 
 
 def setup():
@@ -34,7 +36,7 @@ def draw():
   player.draw()
 
   spawn = random.randint(0, 1000)
-  if spawn <= enemyChance:
+  if len(enemies) < maxEnemyCount and spawn <= enemyChance:
     #spawn an enemy and add it to the list
     ex = random.randint(0, 280)
     ey = random.randint(0, 200)
@@ -50,10 +52,17 @@ def draw():
   for bul in bullets:
     bul.draw()
     bul.move()
-    
+    if bul.y < 0: bullets.remove(bul)
+    for ene in enemies:
+      if hitbox(bul.x, bul.y, ene.x, ene.x+10, ene.y, ene.y+10):
+        bullets.remove(bul)
+        enemies.remove(ene)
+  
   for bul in enemyBullets:
     bul.draw()
     bul.move()
+    if bul.y > 400:
+      enemyBullets.remove(bul)
     #move
 '''
 Game logic

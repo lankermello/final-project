@@ -69,3 +69,11 @@ class EnemyBullet:
     p5.translate(self.x, self.y)
     p5.image(self.img, 0, 0, 2, 2)
     p5.pop()
+'''
+TODO
+1. implement hitboxes
+2. start menu
+3. implement deletion of bullet and enemy
+4. implement hit points
+5. done???
+'''
