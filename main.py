@@ -15,8 +15,10 @@ spaceshipImg = p5.loadImage("sprites/spaceship.jpg")
 enemy0Img = p5.loadImage("sprites/enemy1.png")
 enemy1Img = p5.loadImage("sprites/enemy0.png")
 bulletImg = p5.loadImage("sprites/bullet.png")
+heartImg = p5.loadImage("sprites/heart.png")
 enemyBulletImg = p5.loadImage("sprites/bulletEnemy.png")
 maxEnemyCount = 15
+
 
 
 def setup():
@@ -35,6 +37,8 @@ def draw():
 
   player.draw()
 
+  drawHP(player.hp)
+
   spawn = random.randint(0, 1000)
   if len(enemies) < maxEnemyCount and spawn <= enemyChance:
     #spawn an enemy and add it to the list
@@ -50,7 +54,6 @@ def draw():
     ele.move()
     shootChance = random.randint(0, 100)
     if shootChance < enemyShootChance:
-      print("LOL", len(enemyBullets))
       enemyBullets.append(EnemyBullet(ele.x, ele.y, enemyBulletImg))
 
   for bul in bullets:
@@ -70,10 +73,20 @@ def draw():
     if hitbox(bul.x, bul.y, player.x, player.x+20, player.y, player.y+40):
       enemyBullets.remove(bul)
       player.hp -= 1
-      
+
 # event functions below should be included,
 # even if they don't do anything:
-
+def drawHP(num):
+  step = 20
+  x = 0
+  y = 0
+  for i in range(num):
+    p5.push()
+    p5.translate(x, y)
+    p5.image(heartImg, 0, 0, 15, 15)
+    p5.pop()
+    x += step
+    
 def keyPressed(event):
   #print('keyPressed.. ' + str(p5.key))
   #a/d: left to right movement
