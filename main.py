@@ -21,11 +21,15 @@ maxEnemyCount = 15
 
 
 
+
 def setup():
   #called once
   p5.createCanvas(canvasX, canvasY)
   global player
   player = Spaceship(10, 150, 230, spaceshipImg)
+
+  global game_state
+  game_state = 'START'
 
   #spawn one enemy at the beginning
   enemies.append(Enemy(50, 50, enemy0Img))
@@ -34,7 +38,31 @@ def draw():
   #called continuously after setup()
   p5.background(51)  
   p5.fill(0)
+  global game_state
 
+  if player.hp == 0:
+    #game over
+    game_state = 'OVER'
+
+  elif len(enemies) == 0:
+    game_state = 'WIN'
+
+  if game_state == 'WIN':
+    p5.textSize(12);
+    p5.fill(255);
+    p5.stroke(0);
+    p5.strokeWeight(4);
+    p5.text('You win!.\nPress space to restart', 50, 50);
+    return
+  
+  if game_state == 'OVER':
+    p5.textSize(12);
+    p5.fill(255);
+    p5.stroke(0);
+    p5.strokeWeight(4);
+    p5.text('Game Over.\nPress space to restart', 50, 50);
+    return
+  #else play game normally
   player.draw()
 
   drawHP(player.hp)
@@ -90,11 +118,21 @@ def drawHP(num):
 def keyPressed(event):
   #print('keyPressed.. ' + str(p5.key))
   #a/d: left to right movement
+  global game_state
+  if game_state == 'WIN' or 'OVER':
+    if p5.key == ' ':
+      game_state = 'PLAY'
+      enemies.clear()
+      bullets.clear()
+      enemyBullets.clear()
+      enemies.append(Enemy(50, 50, enemy0Img))
+      player.hp = 10
   if p5.key == 'a':
     #move to the left
     player.x -= 10
   elif p5.key == 'd':
     player.x += 10
+  
 
 def keyReleased(event):
   #print('keyReleased.. ' + str(p5.key))
